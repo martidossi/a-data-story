@@ -26,6 +26,8 @@ def _(mo):
         r"""
     ### **Dataviz Python makeover**
     # When Europeans fly nest
+
+    ---
     """
     )
     return
@@ -41,18 +43,16 @@ def _(mo):
     return
 
 
-@app.cell
-def _(mo):
-    mo.md(
-        r"""
+app._unparsable_cell(
+    r"""
     This chart, despite its simplicity, contains several questionable design choices and leaves ample room for improvement. It is a bubble chart representing the average age at which young people leave home in various European countries. Each country is depicted by a bubble indicating the related average age, with the bubble color corresponding to an age group, as shown in the legend. See [references](https://www.luzmo.com/blog/bad-data-visualization).
 
     But what determines the placement of these bubbles? And why are all the circles the same size, even though their underlying values differ?
 
     The goal of this notebook is to explore alternative visualization approaches that represent this data more effectively and intuitively.
-    """
-    )
-    return
+    """,
+    column=None, disabled=False, hide_code=True, name="_"
+)
 
 
 @app.cell(hide_code=True)
