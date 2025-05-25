@@ -10,7 +10,7 @@ For local installation, follow the steps below.
    ```sh
    git clone https://github.com/martidossi/data_viz_makeover.git
    ```
-2. Create a Python virtual env (named data_viz_makeover)
+2. Create a Python virtual env (named `data_viz_makeover`)
    ```sh
    conda create -n data_viz_makeover python=3.13
    ```
