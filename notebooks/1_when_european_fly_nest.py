@@ -13,9 +13,11 @@ def _():
     import matplotlib.colors as mcolors
     # '%matplotlib inline' command is supported automatically in marimo
     import seaborn as sns
+    import altair as alt
+    import plotly.express as px
 
-    plt.rcParams["font.family"] = "Arial"
-    return mcolors, mo, pd, plt, sns
+    # plt.rcParams["font.family"] = "Arial"
+    return alt, mcolors, mo, pd, sns
 
 
 @app.cell(hide_code=True)
@@ -104,88 +106,160 @@ def _(pd):
 
 @app.cell
 def _(df):
-    print(f'Number of rows: {df.shape[0]}, n of columns: {df.shape[1]}')
+    print(f'Number of rows: {df.shape[0]}, number of columns: {df.shape[1]}')
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""## 2. Barplot""")
+    mo.md(
+        r"""
+    ## 2. Barplot
+    The easiest yet most effective way to redesign this visualization is by using a bar chart. In addition to changing the visual model, we also update the **color scheme**: rather than using the rainbow palette from the original data visualization, we apply a more perceptually friendly one from the Seaborn library. For the sake of readability, we opt for a horizontal bar chart.
+    """
+    )
     return
 
 
 @app.cell
-def _(df):
-    # We need dedicated colors for different age clusters.
-    df.age_cluster.unique()
-    return
-
-
-@app.cell
-def _(df, sns):
+def _(df, mcolors, sns):
     # Rather than the color palette used in the chart, we opt for this one:
     palette = sns.color_palette("rocket", n_colors=df.age_cluster.nunique())
-    palette
     # (for more color palette: https://www.practicalpythonfordatascience.com/ap_seaborn_palette).
+
+    # Get hex codes:
+    hex_colors = [mcolors.to_hex(color) for color in palette][::-1]
+
+    # Add a col to the df:
+    dict_age_color = dict(zip(df.age_cluster.unique(), hex_colors))
+    df['color'] = df.age_cluster.map(dict_age_color)
     return (palette,)
 
 
 @app.cell
-def _(mcolors, palette):
-    # Get hex codes:
-    hex_colors = [mcolors.to_hex(color) for color in palette]
-    hex_colors = hex_colors[::-1]
-    return (hex_colors,)
+def _(mo):
+    # Dropdown to decide how to sort
+    sort_by = mo.ui.dropdown(
+        options=["by age", "by country name"],
+        value="by age",
+        label="How do you want to sort the bars?",
+    )
+    mo.md(f"### Sort values\n\n{sort_by}")
+    return (sort_by,)
 
 
 @app.cell
-def _(df, hex_colors):
-    # Add a col to the df:
-    dict_age_color = dict(zip(df.age_cluster.unique(), hex_colors))
-    df['color'] = df.age_cluster.map(dict_age_color)
+def _(alt, df, mcolors, mo, palette, sort_by):
+    domain = df.age_cluster.unique()
+    range_ = [mcolors.to_hex(color) for color in palette][::-1]
+    sort_method = "ascending" if sort_by.value == "by country name" else "-x"
+
+    barh_chart = mo.ui.altair_chart(
+        alt.Chart(df)
+        .mark_bar()
+        .encode(
+            y=alt.Y("country:N", title="Country", sort=sort_method),
+            x=alt.X("avg_age_22:Q", title="Average age"),
+            color=alt.Color("age_cluster:N").scale(domain=domain, range=range_)
+        )
+        .properties(title="When Europeans fly nest (2022)", height=500),
+    )
+
+    barh_chart = barh_chart.configure_title(fontSize=20)
+    barh_chart
+    return domain, range_
+
+
+@app.cell
+def _(df):
+    # Utility cols for charts
+    df['idx'] = df.groupby('age_cluster').cumcount().add(1)
+
+    dict_age_cluster_id = dict(zip(df.age_cluster.unique(), range(6)))
+    df['age_cluster_id'] = df.age_cluster.map(dict_age_cluster_id)
+    df.head()
     return
 
 
 @app.cell
-def _(df, plt):
-    fig, ax = plt.subplots(1, 1, figsize=(8, 8))
-
-    # Horizontal bar chart
-    ax.barh(y=range(len(df)), width=df.avg_age_22, color=df.color, label=df.age_cluster)
-
-    # Update labels on the y-axis
-    ax.set_yticks(range(len(df)), labels=df.country, fontsize=10)
-
-    # Axis labelling
-    ax.set_xlabel('Average age')
-
-    # Hide axis and ticks on the top and right side
-    ax.xaxis.set_ticks_position('bottom')
-    ax.yaxis.set_ticks_position('left')
-    ax.spines['right'].set_visible(False)
-    ax.spines['top'].set_visible(False)
-
-    # Enable and customize the x-axis grid
-    ax.xaxis.grid(True, linestyle=':')
-
-    # Set title & fig-level subtitle
-    # Mid point of left and right x-positions
-    fig.suptitle('When Europeans fly nest', fontsize=15, fontweight='bold', x=0.125, y=0.98, horizontalalignment='left', verticalalignment='top')
-    ax.set_title('Average age at which young people leave the parent household, 2022.', fontsize=10, loc='left')
-
-    # Legend
-    handles, labels = plt.gca().get_legend_handles_labels()
-    handles, labels = handles[::-1], labels[::-1]
-    by_label = dict(zip(labels, handles))
-    plt.legend(by_label.values(), by_label.keys(), title='Age groups')
-
-    fig.tight_layout()
-    plt.show()
+def _(mo):
+    mo.md(
+        r"""
+    ## 3. Bubble chart
+    This visualization preserves the original bubble chart model. However, the bubble sizes are so close in value that differences in area are barely noticeable, even though the size is now proportional to the encoded value. Visually, grouping the bubbles by cluster creates mental order and allows for a quick comparison of cluster sizes.
+    """
+    )
     return
 
 
 @app.cell
-def _():
+def _(alt, df, domain, mo, range_):
+    cluster_labels = df['age_cluster'].unique().tolist() 
+
+    # Build JS expression for label replacement
+    label_expr = "datum.value == null ? '' : " + " || ".join(
+        [f"(datum.value == {i} ? '{label}' : '')" for i, label in enumerate(cluster_labels)]
+    )
+
+    points = mo.ui.altair_chart(
+        alt.Chart(df)
+        .mark_circle()
+        .encode(
+            x=alt.X(
+                "idx:Q", 
+                title=None,
+                axis=None
+            ),
+            y=alt.Y(
+                "age_cluster_id:Q", 
+                axis=alt.Axis(
+                    title="Age group",
+                    labelExpr=label_expr,
+                    tickCount=len(cluster_labels)
+                )),
+            size=alt.Size(
+                "avg_age_22:Q", 
+                scale=alt.Scale(type='sqrt', range=[100*df.avg_age_22.min(), 100*df.avg_age_22.max()]), legend=None),
+            color=alt.Color("age_cluster:N", legend=None).scale(domain=domain, range=range_),
+            tooltip=[
+                alt.Tooltip('country:N', title='Country'),
+                alt.Tooltip('avg_age_22:Q', title='Avg age'),
+            ],
+        )
+        .properties(
+            width=600,
+            height=400,
+            title="When Europeans fly nest (2022)",
+        )
+    )
+
+    # Label over bubbles
+    text = alt.Chart(df).mark_text(
+        dy=0, 
+        fontSize=11
+    ).encode(
+        x="idx:Q", # shift text above the bubble
+        y="age_cluster_id:Q",
+        text="country:N"
+    )
+
+    # Combine and autosize
+    scatter_plot = points + text
+    scatter_plot = (
+        scatter_plot
+            .configure_view(
+                strokeWidth=0
+            ).configure_title(
+                fontSize=20)
+            .properties(
+                autosize=alt.AutoSizeParams(
+                type="fit",  # or "fit-x", "pad"
+                contains="padding"
+                )
+            )
+    )
+
+    scatter_plot
     return
 
 
