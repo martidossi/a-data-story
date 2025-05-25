@@ -39,12 +39,26 @@ def _(mo):
     return
 
 
+@app.cell
+def _(mo):
+    mo.md(
+        r"""
+    This chart, despite its simplicity, contains several questionable design choices and leaves ample room for improvement. It is a bubble chart representing the average age at which young people leave home in various European countries. Each country is depicted by a bubble indicating the related average age, with the bubble color corresponding to an age group, as shown in the legend. See [references](https://www.luzmo.com/blog/bad-data-visualization).
+
+    But what determines the placement of these bubbles? And why are all the circles the same size, even though their underlying values differ?
+
+    The goal of this notebook is to explore alternative visualization approaches that represent this data more effectively and intuitively.
+    """
+    )
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(
         r"""
-    ## 1. Import data
-    We create the dataset from scratch given the values in the image.
+    ## 1. Data
+    The first step to better understand and improve the visualization involves the data itself: we start by recreating the dataset from scratch based on the values shown in the image.
     """
     )
     return
@@ -84,7 +98,7 @@ def _(pd):
 
     df = pd.DataFrame(data=data, columns=['country', 'avg_age_22', 'age_cluster']).sort_values(by='avg_age_22')
 
-    df.head()
+    df
     return (df,)
 
 
