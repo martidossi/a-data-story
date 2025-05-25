@@ -1,6 +1,8 @@
 # data_viz_makeover
 ![Python](https://img.shields.io/badge/python-3.13-blue.svg)
 ![JupyterLab](https://img.shields.io/badge/works%20with-JupyterLab-orange?logo=jupyter)
+[![Marimo](https://img.shields.io/badge/marimo-v0.8.3-blue)](https://github.com/marimo-team/marimo)
+
 
 ## About The Project
 This project began as a personal initiative to explore alternative ways of visualizing data in Python. It focuses on reimagining charts that are ineffective for various reasons, experimenting with more meaningful and insightful visual representations.
