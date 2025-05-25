@@ -32,10 +32,9 @@ def _(mo):
 @app.cell
 def _(mo):
     mo.image(
-        src="../pics/europeans_parental_household.png",
+        src="public/europeans_parental_household.png",
         width=500,
-        rounded=True,
-        caption="Original viz"
+        rounded=True
     )
     return
 
