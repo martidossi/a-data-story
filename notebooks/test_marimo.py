@@ -8,9 +8,20 @@ app = marimo.App()
 def _(mo):
     mo.md(
         r"""
-        ### **Dataviz Python makeover**
-        # When Europeans fly nest
-        """
+    ### **Dataviz Python makeover**
+    # When Europeans fly nest
+    """
+    )
+    return
+
+
+@app.cell
+def _(mo):
+    mo.image(
+        src="../pics/europeans_parental_household.png",
+        width=500,
+        rounded=True,
+        caption="Original viz"
     )
     return
 
@@ -19,31 +30,9 @@ def _(mo):
 def _(mo):
     mo.md(
         r"""
-        *References*
-        - mkladv
-        - 
-        """
-    )
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(
-        r"""
-        <img src="../pics/europeans_parental_household.png" style="height: 500px;"/>
-        """
-    )
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(
-        r"""
-        ## 0. Import libraries
-        We begin by setting up the coding environment.
-        """
+    ## 0. Import libraries
+    We begin by setting up the coding environment.
+    """
     )
     return
 
@@ -55,7 +44,7 @@ def _():
     import pandas as pd
     import matplotlib.pyplot as plt
     import matplotlib.colors as mcolors
-    # '%matplotlib inline' command supported automatically in marimo
+    # '%matplotlib inline' command is supported automatically in marimo
     import seaborn as sns
     return mcolors, pd, plt, sns
 
@@ -76,15 +65,15 @@ def _(plt, sns):
 def _(mo):
     mo.md(
         r"""
-        ## 1. Import data
-        We create the dataset from scratch given the values in the image.
-        """
+    ## 1. Import data
+    We create the dataset from scratch given the values in the image.
+    """
     )
     return
 
 
 @app.cell
-def _():
+def _(pd):
     data = [
         ['Finland', 21.3, 'below 23'],
         ['Estonia', 22.7, 'below 23'],
@@ -114,29 +103,22 @@ def _():
         ['Slovakia', 30.8, '29-31'],
         ['Croatia', 33.4, 'over 31'],
     ]
-    return (data,)
 
-
-@app.cell
-def _(data, pd):
     df = pd.DataFrame(data=data, columns=['country', 'avg_age_22', 'age_cluster']).sort_values(by='avg_age_22')
+
     df.head()
     return (df,)
 
 
 @app.cell
 def _(df):
-    df.shape
+    print(f'Number of rows: {df.shape[0]}, n of columns: {df.shape[1]}')
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
-        ## 2. Barplot
-        """
-    )
+    mo.md(r"""## 2. Barplot""")
     return
 
 
@@ -212,8 +194,7 @@ def _(df, plt):
 
 @app.cell
 def _():
-    import marimo as mo
-    return (mo,)
+    return
 
 
 if __name__ == "__main__":
