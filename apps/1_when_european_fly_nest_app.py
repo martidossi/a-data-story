@@ -36,14 +36,12 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.image(
-        src="public/europeans_parental_household.png",
-        width=500,
-        rounded=True
-    )
-    return
+app._unparsable_cell(
+    r"""
+    <img src=\"https://raw.githubusercontent.com/martidossi/data_viz_makeover/main/pics/europeans_parental_household.png\" width=\"500\" style=\"border-radius: 10px;\">
+    """,
+    column=None, disabled=False, hide_code=True, name="_"
+)
 
 
 @app.cell(hide_code=True)
