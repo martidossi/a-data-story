@@ -445,7 +445,7 @@ def _(pd):
         ''.join([
             'https://raw.githubusercontent.com/',
             'martidossi/',
-            'data_viz_makeover/main/notebooks/public/',
+            'data_viz_makeover/main/data/',
             'yth_demo.csv'
         ]),
         sep=';'

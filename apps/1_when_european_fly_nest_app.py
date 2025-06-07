@@ -440,7 +440,17 @@ def _(mo):
 
 @app.cell
 def _(pd):
-    df_context = pd.read_csv('public/yth_demo.csv', sep=';')
+    # df_context = pd.read_csv('public/yth_demo.csv', sep=';')
+    df_context = pd.read_csv(
+        ''.join([
+            'https://raw.githubusercontent.com/',
+            'martidossi/',
+            'data_viz_makeover/main/data/',
+            'yth_demo.csv'
+        ]),
+        sep=';'
+    )
+
     df_context = df_context[df_context.country!='European Union - 27 countries (from 2020)']
     df_context
     return (df_context,)
