@@ -141,7 +141,7 @@ def _(pd):
     df = pd.DataFrame(
         data=data, 
         columns=['country', 'avg_age_22', 'age_cluster']
-    ).sort_values(by='avg_age_22')
+    ).sort_values(by='avg_age_22') 
 
     df
     return (df,)
