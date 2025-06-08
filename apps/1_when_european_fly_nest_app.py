@@ -82,17 +82,19 @@ def _(mo):
     - [2.3 Heatmaps](#23-heatmaps)
 
     [References](#references)
-
-    ----
     """
     )
     return
 
 
-@app.cell(hide_code=True)
-def _():
+app._unparsable_cell(
+    r"""
+    ----
+
     # 1. Chart makeover
-    return
+    """,
+    column=None, disabled=False, hide_code=True, name="_"
+)
 
 
 @app.cell(hide_code=True)
