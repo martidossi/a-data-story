@@ -38,11 +38,7 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.image(
-        src="pics/europeans_parental_household.png",
-        width=500,
-        rounded=True
-    )
+    mo.md(r"""<img src="https://raw.githubusercontent.com/martidossi/data_viz_makeover/main/pics/europeans_parental_household.png" width="500" style="border-radius: 10px;">""")
     return
 
 
