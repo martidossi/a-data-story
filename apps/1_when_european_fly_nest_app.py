@@ -56,6 +56,8 @@ def _(mo):
 
     💻 **How**: everything is developed in Python. You're currently in a [Marimo](https://marimo.io/) notebook, an interactive and lightweight Python environment designed for enhanced data exploration and storytelling. Depending on the specific need, visualizations are built using [Altair](https://altair-viz.github.io/) or [Plotly](https://plotly.com/python/).
 
+    **The code**: if you're interested in the code behind, 
+
     -----
     """
     )
