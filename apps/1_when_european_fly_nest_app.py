@@ -87,14 +87,22 @@ def _(mo):
     return
 
 
-app._unparsable_cell(
-    r"""
+@app.cell(hide_code=True)
+def _():
+    #
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(
+        r"""
     ----
 
     # 1. Chart makeover
-    """,
-    column=None, disabled=False, hide_code=True, name="_"
-)
+    """
+    )
+    return
 
 
 @app.cell(hide_code=True)
