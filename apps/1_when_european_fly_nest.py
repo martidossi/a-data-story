@@ -54,6 +54,8 @@ def _(mo):
 
     <img src="https://raw.githubusercontent.com/martidossi/data_viz_makeover/main/pics/see_code.png" width="300">
 
+    ⚠️ _**Note**: this notebook is best viewed on a desktop screen for full functionality and layout, some elements may not display properly on mobile._
+
     ---
     """
     )
