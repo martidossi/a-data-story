@@ -39,7 +39,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.image(
-        src="../pics/europeans_parental_household.png",
+        src="pics/europeans_parental_household.png",
         width=500,
         rounded=True
     )
