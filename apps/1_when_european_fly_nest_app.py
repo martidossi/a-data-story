@@ -38,7 +38,11 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""<img src="https://raw.githubusercontent.com/martidossi/data_viz_makeover/main/pics/europeans_parental_household.png" width="500" style="border-radius: 10px;">""")
+    mo.image(
+        src="pics/europeans_parental_household.png",
+        width=500,
+        rounded=True
+    )
     return
 
 
@@ -50,11 +54,11 @@ def _(mo):
 
     🔍 **The goal** of this notebook is to explore alternative visualization approaches that represent the same data (and more) more effectively and intuitively, eventually with more contextual information.
 
-    💻 **How**: everything is developed in Python. You're currently in a [Marimo](https://marimo.io/) notebook, an interactive and lightweight Python environment designed for enhanced data exploration and storytelling. Depending on the specific need, visualizations are built using [Altair](https://altair-viz.github.io/) or [Plotly](https://plotly.com/python/).
+    💻 **How**: everything is developed in Python. You're currently in a [Marimo](https://marimo.io/) notebook, an interactive and lightweight Python environment designed for enhanced data exploration and storytelling. Depending on the specific need, visualizations are built using [Altair](https://altair-viz.github.io/) or [Plotly](https://plotly.com/python/). If you're interested in the **code** behind, you can click on the “Show code” toggle button in the top right corner of the notebook interface:
 
-    **The code**: if you're interested in the code behind, 
+    <img src="https://raw.githubusercontent.com/martidossi/data_viz_makeover/main/pics/see_code.png" width="300">
 
-    -----
+    ---
     """
     )
     return
@@ -82,12 +86,6 @@ def _(mo):
     [References](#references)
     """
     )
-    return
-
-
-@app.cell(hide_code=True)
-def _():
-    #
     return
 
 
