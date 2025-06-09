@@ -5,7 +5,7 @@
 
 
 ## About The Project
-This project began as a personal initiative to explore alternative ways of visualizing data in Python. It focuses on reimagining charts that are ineffective for various reasons, experimenting with more meaningful and insightful visual representations.
+This project started as a personal exploration into alternative tools and ways of visualizing data in Python. It’s about giving a second life to charts that don’t quite live up to their potential, by experimenting with visual forms that better capture meaning and reveal insight.
 
 ## 🛠️ Getting started
 For local installation, follow the steps below.
