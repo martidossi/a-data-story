@@ -425,7 +425,7 @@ def _(mo):
     ---
 
     # 2. Adding contextual data
-    Continuing with the exercise, it can be valuable to retrieve the original data source to gain additional context and insights. _This is not related to modifications of the original chart, but rather to possible extensions._ In particular, the Eurostat website provides more granular data by gender and over time —data are available from 2000, but the earliest datasets are partially incomplete, so we focus only on the last 10 years, from 2015 to 2024.
+    Continuing with the exercise, it may be helpful to explore the original data source (available on the Eurostat [website](https://ec.europa.eu/eurostat/web/main/home), see [references](#references)) to gain additional context and insights. _This is not related to modifications of the original chart, but rather to possible extensions._ In particular, the Eurostat website provides more granular data by gender and over time —data are available from 2000, but the earliest datasets are partially incomplete, so we focus only on the last 10 years, from 2015 to 2024.
     """
     )
     return
@@ -887,7 +887,7 @@ def _(alt, country_sorting_heatmap, df_long, mo, viz_by):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""Finally, this last heatmap shifts the perspective to also include gender in a single view. Earlier, with the [ranged dot plot](#22-ranged-dot-plot), we saw that (at least) in 2022 girls tended to leave home earlier than boys in every country. But does this pattern hold _across all 10 years_ in the dataset? In this chart, the color helps answer that question: shades closer to **<span style="color:#2d59cd">blue</span>** indicate that boys tend to leave earlier, while tones leaning toward **<span style="color:#eb495a">red</span>** suggest that girls do. It’s a quick way to spot trends and exceptions over time and across countries.""")
+    mo.md(r"""Finally, this last heatmap shifts the perspective to also include gender in a single view. Earlier, with the [ranged dot plot](#22-ranged-dot-plot), we saw that (at least) in 2022 girls tended to leave home earlier than boys in every country. But does this pattern hold _across all 10 years_ in the dataset? In this chart, the color helps answer that question: shades closer to **<span style="color:#2d59cd">blue</span>** indicate that boys tend to leave home later, while tones leaning toward **<span style="color:#eb495a">red</span>** suggest that girls do. It’s a quick way to spot trends and exceptions over time and across countries —and what’s most striking is just how consistent this pattern remains across both time and place.""")
     return
 
 
