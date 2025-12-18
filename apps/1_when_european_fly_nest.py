@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.11"
+__generated_with = "0.17.6"
 app = marimo.App()
 
 
@@ -24,28 +24,27 @@ def _():
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ### **A Python Dataviz Makeover Series**
     ---
     # Episode 1 – **When Europeans fly nest**
 
     ---
-    """
-    )
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""<img src="https://raw.githubusercontent.com/martidossi/data_viz_makeover/main/pics/europeans_parental_household.png" width="500" style="border-radius: 10px;">""")
+    mo.md(r"""
+    <img src="https://raw.githubusercontent.com/martidossi/data_viz_makeover/main/pics/europeans_parental_household.png" width="500" style="border-radius: 10px;">
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     Despite its simplicity and overall ease of readability, this chart presents a few questionable design choices that could be revisited to enhance clarity and effectiveness (_e.g., what drives the positioning of the bubbles? Why do all the circles share the same size, even though their underlying values differ? Is the chosen colormap truly effective in this context?_). It is a bubble chart representing the average age at which young people leave home in European countries. Each country is depicted by a bubble indicating the related average age, with the bubble color corresponding to an age group, as shown in the legend. See [references](#references).
 
     🔍 **The goal** of this notebook is to explore alternative visualization approaches that represent the same data (and more) more effectively and intuitively, eventually with more contextual information.
@@ -57,15 +56,13 @@ def _(mo):
     ⚠️ _**Note**: this notebook is best viewed on a desktop screen for full functionality and layout, some elements may not display properly on mobile._
 
     ---
-    """
-    )
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## Index
 
     **Part 1**: [Chart makeover](#1-chart-makeover)
@@ -82,33 +79,28 @@ def _(mo):
     - [2.3 Heatmaps](#23-heatmaps)
 
     [References](#references)
-    """
-    )
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ----
 
     # 1. Chart makeover
-    """
-    )
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## 1.1 Data
     The first step to better understand and improve the visualization involves the data itself: we start by recreating the dataset from scratch based on the values shown in the image.
 
     🔢 **How is this metric calculated?** We're looking at the _estimated average age at which young people leave their parental home_ across European countries. According to Eurostat, this represents the age at which 50% of the population no longer live in a household with their parent(s) (see [references](#references) for more details).
-    """
-    )
+    """)
     return
 
 
@@ -161,12 +153,10 @@ def _(df):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## 1.2 Barplot
     The easiest yet most effective way to redesign this visualization is by using a bar chart. In addition to changing the visual model, we also update the **color scheme**: rather than using the rainbow palette from the original data visualization, we apply a more perceptually friendly one from the Seaborn library, named `magma`. For the sake of readability, we also opt for a horizontal bar chart.
-    """
-    )
+    """)
     return
 
 
@@ -262,12 +252,10 @@ def _(alt, df, dict_age_color, mo, pd, sort_by):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## 1.3 Bubble chart
     This visualization builds on the original bubble chart concept. Visually grouping the bubbles by cluster reinforces a sense of mental order and enables quick comparisons of cluster sizes. Although each bubble’s size is now proportional to its encoded value, the differences are so small that the variations in area are barely noticeable.
-    """
-    )
+    """)
     return
 
 
@@ -372,13 +360,11 @@ def _(alt, df, dict_age_color, mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## 1.4 Choropleth map
 
     When dealing with geographic data, maps provide the most immediate and intuitive representation. In this case, coloring countries based on their age group bins allows us to easily visualize large-scale trends.
-    """
-    )
+    """)
     return
 
 
@@ -420,25 +406,21 @@ def _(df, dict_age_color, mo, px):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ---
 
     # 2. Adding contextual data
     Continuing with the exercise, it may be helpful to explore the original data source (available on the Eurostat [website](https://ec.europa.eu/eurostat/web/main/home), see [references](#references)) to gain additional context and insights. _This is not related to modifications of the original chart, but rather to possible extensions._ In particular, the Eurostat website provides more granular data by gender and over time —data are available from 2000, but the earliest datasets are partially incomplete, so we focus only on the last 10 years, from 2015 to 2024.
-    """
-    )
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## 2.1 Data
     Here's the complete dataset which includes one column for each year covered (`2015`, ..., `2024`), plus a feature `sex` which takes 3 values (`Total`, `Males` and `Females`) to distinguish by gender.
-    """
-    )
+    """)
     return
 
 
@@ -462,14 +444,12 @@ def _(pd):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ✔️ **Quality checks**:
 
     - We check that for each combination of `sex` and `year`, the number of available countries is consistent (see chart below). In particular, UK left EU in 2020, and other countries such as North Macedonia, Montenegro, and Türkiye have been excluded from recent data collections to maintain focus on official EU members.
     - We verify that the values in 2022 match those in the original chart.
-    """
-    )
+    """)
     return
 
 
@@ -554,7 +534,9 @@ def _(df, df_context, mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""These are both candidate countries. For the analysis, we focus only on **official EU member states** as of 2024 (same as in 2022), which are 27. This ensures consistency in the evaluation over time and automatically excludes any potential missing values.""")
+    mo.md(r"""
+    These are both candidate countries. For the analysis, we focus only on **official EU member states** as of 2024 (same as in 2022), which are 27. This ensures consistency in the evaluation over time and automatically excludes any potential missing values.
+    """)
     return
 
 
@@ -573,13 +555,11 @@ def _():
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        """
+    mo.md("""
     📌 **Do the 2022 values match?**
 
     Not perfectly —there are three countries with slight differences, as shown in the `diff` column of the table below (head), sorted by `diff`. Moving forward, we will keep referencing the **original** data source (the one from Eurostat).
-    """
-    )
+    """)
     return
 
 
@@ -597,7 +577,9 @@ def _(df, df_context):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""🔧 **Just a quick technicality**: as it stands, the dataset doesn’t exactly match the characteristics of either wide or long format. For the sake of clarity and easier processing, we convert it to long format (see table below), so that each variable is a column and each observation a row. This choice is typically preferable as it accommodates datasets of arbitrary complexity. More about this [here](https://seaborn.pydata.org/tutorial/data_structure.html).""")
+    mo.md(r"""
+    🔧 **Just a quick technicality**: as it stands, the dataset doesn’t exactly match the characteristics of either wide or long format. For the sake of clarity and easier processing, we convert it to long format (see table below), so that each variable is a column and each observation a row. This choice is typically preferable as it accommodates datasets of arbitrary complexity. More about this [here](https://seaborn.pydata.org/tutorial/data_structure.html).
+    """)
     return
 
 
@@ -621,12 +603,10 @@ def _(df_context_eu, pd):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## 2.2 Ranged dot plot
     The goal of this first chart is to compare the average age at which young people leave their parental home, broken down by **gender** in 2022, the year we've focused on so far. The visualization makes it very clear how, on average, girls consistently leave earlier than boys. We can also sort the countries in different ways to see how the rankings shift and explore the patterns!
-    """
-    )
+    """)
     return
 
 
@@ -675,7 +655,6 @@ def _(df_long):
         'by female age': sort_sex_f,
         'by male age': sort_sex_m,
     }
-
     return df_plot_dot, dict_sorting_dot
 
 
@@ -751,14 +730,12 @@ def _(alt, df_plot_dot, dict_sex_color, dict_sorting_dot, mo, sort_dot_by):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ## 2.3 Heatmaps
     Line charts are typically the go-to option to visualize how a variable changes **over time**. However, in this case, we’re dealing with multiple countries and very similar trends both across and within them. A classic line chart would quickly turn into a spaghetti plot —messy and hard to read. There are many alternatives: for instance, using small multiples to dedicate a single chart to each country.
 
     Here, we choose to try a heatmap, where the average age over time is not represented by lines and points, but instead encoded as color, which is always one of the most intuitive and compact ways to spot patterns at a glance. Countries are sorted by increasing average age over time.
-    """
-    )
+    """)
     return
 
 
@@ -840,7 +817,9 @@ def _(alt, country_sorting_heatmap, df_long, dict_age_color, mo, viz_by):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""The version below uses a continuous color scale instead of a discrete one, which can help highlight more subtle differences and patterns across countries and years.""")
+    mo.md(r"""
+    The version below uses a continuous color scale instead of a discrete one, which can help highlight more subtle differences and patterns across countries and years.
+    """)
     return
 
 
@@ -887,7 +866,9 @@ def _(alt, country_sorting_heatmap, df_long, mo, viz_by):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""Finally, this last heatmap shifts the perspective to also include gender in a single view. Earlier, with the [ranged dot plot](#22-ranged-dot-plot), we saw that (at least) in 2022 girls tended to leave home earlier than boys in every country. But does this pattern hold _across all 10 years_ in the dataset? In this chart, the color helps answer that question: shades closer to **<span style="color:#2d59cd">blue</span>** indicate that boys tend to leave home later, while tones leaning toward **<span style="color:#eb495a">red</span>** suggest that girls do. It’s a quick way to spot trends and exceptions over time and across countries —and what’s most striking is just how consistent this pattern remains across both time and place.""")
+    mo.md(r"""
+    Finally, this last heatmap shifts the perspective to also include gender in a single view. Earlier, with the [ranged dot plot](#22-ranged-dot-plot), we saw that (at least) in 2022 girls tended to leave home earlier than boys in every country. But does this pattern hold _across all 10 years_ in the dataset? In this chart, the color helps answer that question: shades closer to **<span style="color:#2d59cd">blue</span>** indicate that boys tend to leave home later, while tones leaning toward **<span style="color:#eb495a">red</span>** suggest that girls do. It’s a quick way to spot trends and exceptions over time and across countries —and what’s most striking is just how consistent this pattern remains across both time and place.
+    """)
     return
 
 
@@ -965,8 +946,7 @@ def _(alt, color_scale, country_sorting_heatmap_2, df_age_diff, df_long, mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
     ----
 
     ## 🎈Bonus chart
@@ -975,8 +955,7 @@ def _(mo):
 
     1. it includes an animation showing changes from 2014 to 2025,
     2. it uses a continuous color scale, making it easier to spot subtle differences.
-    """
-    )
+    """)
     return
 
 
@@ -1014,9 +993,8 @@ def _(df_long, mo, px):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
-    --- 
+    mo.md(r"""
+    ---
 
     ## References
 
@@ -1029,16 +1007,14 @@ def _(mo):
     - _Inspired by_ **Storytelling with Data Blog** by Cole Nussbaumer Knaflic ::lucide:arrow-down-right:: [URL](https://www.storytellingwithdata.com/makeovers)
 
     - GitHub repo ::lucide:arrow-down-right:: [URL](https://github.com/martidossi/data_viz_makeover)
-    """
-    )
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(
-        r"""
-    --- 
+    mo.md(r"""
+    ---
     ## Thanks for following along, see you in the next one! 🐱
 
     💬 Feel free to get in touch if you have any questions —the project is still in its early stages, and I’d really value your feedback! 🫶
@@ -1048,14 +1024,15 @@ def _(mo):
     - _Is there something else you'd be curious to dive into in the next notebooks?_
 
     **💌 Contacts** Martina Dossi [martinadossi.hello at gmail.com]
-    """
-    )
+    """)
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""<img src="https://marimo.app/logotype-wide.svg" width="200"/>""")
+    mo.md("""
+    <img src="https://marimo.app/logotype-wide.svg" width="200"/>
+    """)
     return
 
 
